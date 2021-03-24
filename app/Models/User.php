@@ -44,13 +44,15 @@ class User extends Authenticatable
     public function fetchRequests() {
         $requests = $this->hasMany(SongRequest::class)->where('fetched', false)->get();
         
+        $res = [];
+
         foreach($requests as $request) {
             $request->fetched = true;
             $request->save();
-            $request->song = json_decode($request->song);
+            $res[] = json_decode($request->song);
         }
 
-        return $requests;
+        return $res;
     }
 
     public function getAllRequests() {
