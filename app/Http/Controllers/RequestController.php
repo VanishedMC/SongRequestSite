@@ -81,7 +81,10 @@ class RequestController extends Controller
             return response('', 404);
         }
 
-        return json_encode($user->fetchRequests(), JSON_UNESCAPED_SLASHES);
+        $res = new \stdClass();
+        $res->songs = $user->fetchRequests();
+
+        return json_encode($res, JSON_UNESCAPED_SLASHES);
     }
 
     public function list(Request $request) {
