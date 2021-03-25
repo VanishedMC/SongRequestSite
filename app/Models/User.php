@@ -55,6 +55,10 @@ class User extends Authenticatable
         return $res;
     }
 
+    public function getOpenRequests() {
+        return $this->hasMany(SongRequest::class)->where('fetched', 0)->get();
+    }
+
     public function getAllRequests() {
         return $this->hasMany(SongRequest::class)->get();
     }
